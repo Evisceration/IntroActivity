@@ -28,7 +28,7 @@ public abstract class IntroActivity extends AppCompatActivity {
     private IntroScreenPagerAdapter mPagerAdapter;
     private LinearLayout mProgressLayout;
     private boolean mShowSkipButton, mShowNextButton;
-    private int mProgressCircleColor;
+    private int mProgressCircleColor = Integer.MIN_VALUE;
 
     @Override
     @CallSuper
@@ -187,7 +187,7 @@ public abstract class IntroActivity extends AppCompatActivity {
                     R.drawable.progress_circle_selected :
                     R.drawable.progress_circle);
 
-            if (mProgressCircleColor == 0) {
+            if (mProgressCircleColor == Integer.MIN_VALUE) {
                 mProgressCircleColor = ContextCompat.getColor(this, R.color.progress_circle_color);
             }
 
