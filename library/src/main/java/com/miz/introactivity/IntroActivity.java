@@ -4,6 +4,8 @@ import android.animation.ArgbEvaluator;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
+import android.support.annotation.ColorInt;
+import android.support.annotation.ColorRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -199,8 +201,17 @@ public abstract class IntroActivity extends AppCompatActivity {
      * of the intro screen.
      * @param color Progress circle color to set.
      */
-    protected void setProgressCircleColor(int color) {
+    protected void setProgressCircleColor(@ColorInt int color) {
         mProgressCircleColor = color;
+    }
+
+    /**
+     * Set the color of the progress circles at the bottom
+     * of the intro screen.
+     * @param colorResId Progress circle color resource to set.
+     */
+    protected void setProgressCircleColorRes(@ColorRes int colorResId) {
+        mProgressCircleColor = ContextCompat.getColor(this, colorResId);
     }
 
     /**
@@ -212,8 +223,9 @@ public abstract class IntroActivity extends AppCompatActivity {
     /**
      * Add an intro screen (Fragment) to the ViewPager.
      * @param introScreen Fragment to add.
+     * @param backgroundColor The background color to apply
      */
-    protected void addIntroScreen(BaseIntroFragment introScreen, int backgroundColor) {
+    protected void addIntroScreen(BaseIntroFragment introScreen, @ColorInt int backgroundColor) {
         mPagerAdapter.addFragment(introScreen, backgroundColor);
     }
 
@@ -239,7 +251,16 @@ public abstract class IntroActivity extends AppCompatActivity {
      * Set the text color of the Skip button. Default color is white (#F0F0F0).
      * @param color Text color to set.
      */
-    protected void setSkipButtonTextColor(int color) {
+    protected void setSkipButtonTextColor(@ColorInt int color) {
+        mSkipButton.setTextColor(color);
+    }
+
+    /**
+     * Set the text color of the Skip button. Default color is white (#F0F0F0).
+     * @param color Text color to set.
+     */
+    protected void setSkipButtonTextColorRes(@ColorRes int colorResId) {
+        int color = ContextCompat.getColor(this, colorResId);
         mSkipButton.setTextColor(color);
     }
 
@@ -248,7 +269,17 @@ public abstract class IntroActivity extends AppCompatActivity {
      * will be 25 percent opaque. Default color is white (#FFFFFF).
      * @param color Background color for the Next / Done button.
      */
-    protected void setNextButtonBackgroundColor(int color) {
+    protected void setNextButtonBackgroundColor(@ColorInt int color) {
+        mNextButton.getBackground().setColorFilter(color, PorterDuff.Mode.SRC_IN);
+    }
+
+    /**
+     * Set the background color of the Next / Done button. The selected color
+     * will be 25 percent opaque. Default color is white (#FFFFFF).
+     * @param colorResId Background color resource for the Next / Done button.
+     */
+    protected void setNextButtonBackgroundColorRes(@ColorRes int colorResId) {
+        int color = ContextCompat.getColor(this, colorResId);
         mNextButton.getBackground().setColorFilter(color, PorterDuff.Mode.SRC_IN);
     }
 
@@ -257,8 +288,17 @@ public abstract class IntroActivity extends AppCompatActivity {
      * Default color is white (#F0F0F0).
      * @param color
      */
-    protected void setNextButtonIconColor(int color) {
+    protected void setNextButtonIconColor(@ColorInt int color) {
         mNextButton.setColor(color);
+    }
+
+    /**
+     * Set the color of the arrow / done icon for the Next / Done button.
+     * Default color is white (#F0F0F0).
+     * @param colorResId
+     */
+    protected void setNextButtonIconColorRes(@ColorRes int colorResId) {
+        mNextButton.setColorRes(colorResId);
     }
 
     /**
